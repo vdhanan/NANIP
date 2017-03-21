@@ -43,6 +43,9 @@ def greedy(G, blackstart):
                 heapq.heappush(toInstall, newPair)
 
     print order
+<<<<<<< HEAD
     return order
+=======
+>>>>>>> 1d4c5b9d7381fe6eb3fe788c818c6407e4c17b3b
         
         

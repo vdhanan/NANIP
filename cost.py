@@ -1,5 +1,6 @@
 import networkx as nx
 
+<<<<<<< HEAD
 """This is the (decreasing convex) function
    you can modify this for different experiments"""
 def f_of(r):
@@ -20,3 +21,10 @@ def cost_function(G,sigma):
     for v in sigma:
         cost+=f_of(r_value(v,G,sigma))
     return cost
+=======
+def cost_function(r):
+    pass
+
+def r_value(v,G,sigma):
+    
+>>>>>>> 1d4c5b9d7381fe6eb3fe788c818c6407e4c17b3b
