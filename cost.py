@@ -1,10 +1,9 @@
 import networkx as nx
 
-<<<<<<< HEAD
 """This is the (decreasing convex) function
    you can modify this for different experiments"""
 def f_of(r):
-    return r
+    return "f(%d)" %r
 
 def r_value(v,G,sigma):
     index = sigma.index(v)
@@ -17,14 +16,19 @@ def r_value(v,G,sigma):
     return r
 
 def cost_function(G,sigma):
-    cost = 0
+    num = dict() # map of number of f(x) and f(x)
     for v in sigma:
-        cost+=f_of(r_value(v,G,sigma))
-    return cost
-=======
-def cost_function(r):
-    pass
-
-def r_value(v,G,sigma):
-    
->>>>>>> 1d4c5b9d7381fe6eb3fe788c818c6407e4c17b3b
+        c = f_of(r_value(v,G,sigma))
+        if c in num:
+            num[c] += 1
+        else:
+            num[c] = 1
+    function = ""
+    for f in num:
+        if num[f] == 1:
+            n = ""
+        else:
+            n = num[f]
+        function += str(n)+f
+        function += "+"
+    return function
