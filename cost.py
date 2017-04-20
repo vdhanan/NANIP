@@ -3,7 +3,8 @@ import networkx as nx
 """This is the (decreasing convex) function
    you can modify this for different experiments"""
 def f_of(r):
-    return "f(%d)" %r
+    # return "f(%d)" %r
+    return r
 
 def r_value(v,G,sigma):
     index = sigma.index(v)
@@ -23,12 +24,38 @@ def cost_function(G,sigma):
             num[c] += 1
         else:
             num[c] = 1
+    return num
+
+def print_cost(num):
     function = ""
-    for f in num:
+    for f in sorted(num.iterkeys()):
+    # for f in num:
         if num[f] == 1:
-            n = ""
+            n = "+"
+        elif num[f] == -1:
+            n = "-"
         else:
-            n = num[f]
-        function += str(n)+f
-        function += "+"
-    return function
+            n = str(num[f])
+        if n[0]!='+' and n[0]!='-':
+            function += "+"
+        function += str(n)+("f(%d)"%f)
+        # function += str(n)+f
+    l=len(function)
+    return function[1:]
+
+def cost_diff(cost1, cost2):
+    diff = dict()
+    # O(n^2) run time, but shouldn't be too bad
+    pos = set(cost1.keys()) - set(cost2.keys())
+    neg = set(cost2.keys()) - set(cost1.keys())
+    for c in pos:
+        diff[c] = cost1[c]
+    for c in neg:
+        diff[c] = -cost2[c]
+    for c in (set(cost1.keys()) & set(cost2.keys())):
+        if cost1[c]-cost2[c]!=0:
+            diff[c] = cost1[c]-cost2[c]
+    return diff
+
+
+# G = nx.graph()
