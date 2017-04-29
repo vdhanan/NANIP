@@ -140,5 +140,5 @@ def testJ1():
 n = int(sys.stdin.readline())
 for i in range(1,n+1):
 	print "running on network number %d"%i
-	filename = sys.stdin.readline()
+	filename = sys.stdin.readline().rstrip('\n')
 	parse(filename,1)
