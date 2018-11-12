@@ -3,6 +3,7 @@ import greedy
 import cost
 import random
 import sys
+import json
 # import matplotlib.pyplot as plt
 
 
@@ -42,19 +43,25 @@ def parse(file,blackstart):
 	sigma = greedy.normal_greedy(G,blackstart)
 	c = cost.cost_function(G, sigma)
 
+        new_dict = {}
+
 	print "Normal greedy: \n"
 	print "Installation order is %s \n" %sigma
-	print "The cost of this order is %s \n" %cost.print_cost(c)
+	#print "The cost of this order is %s \n" %cost.print_cost(c)
+        new_dict['normal_greedy'] = cost.print_cost(c)
 
 	sigma2 = greedy.percentage_greedy(G,blackstart)
 	c2 = cost.cost_function(G, sigma2)
 
 	print "Percentage greedy: \n"
 	print "Installation order is %s \n" %sigma2
-	print "The cost of this order is %s \n" %cost.print_cost(c2)
+	#print "The cost of this order is %s \n" %cost.print_cost(c2)
+        new_dict['percentage_greedy'] = cost.print_cost(c2)
 
 	#diff = cost.cost_diff(c,c2)
 	#print "cost1 - cost2 is %s"%cost.print_cost(diff)
+
+        return new_dict
 
 	# read in the number of rows and columns and number of edges
 
@@ -138,7 +145,11 @@ def testJ1():
 # def minCost(G,blackstart):
 	
 n = int(sys.stdin.readline())
+json_dict = {}
 for i in range(1,n+1):
 	print "running on network number %d"%i
 	filename = sys.stdin.readline().rstrip('\n')
-	parse(filename,1)
+        json_dict[filename] = parse(filename,1)
+with open('data.json', 'w') as outfile:
+    json.dump(json_dict, outfile)
+print(json_dict)

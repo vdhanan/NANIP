@@ -44,8 +44,8 @@ def print_cost(num):
         if f != 0:
             cost += (num[f] * 1/f)
     #l=len(function)
-    function = 'f(0) + ' + str(cost)
-    return function
+    #function = 'f(0) + ' + str(cost)
+    return cost
 
 def cost_diff(cost1, cost2):
     diff = dict()
