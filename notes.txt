@@ -1,0 +1,3 @@
+Varying the network, function, heuristic 
+Keep blackstart node constant at first
+(3 times -- different random choice of blackstart node)

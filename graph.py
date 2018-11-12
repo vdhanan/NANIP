@@ -53,8 +53,8 @@ def parse(file,blackstart):
 	print "Installation order is %s \n" %sigma2
 	print "The cost of this order is %s \n" %cost.print_cost(c2)
 
-	diff = cost.cost_diff(c,c2)
-	print "cost1 - cost2 is %s"%cost.print_cost(diff)
+	#diff = cost.cost_diff(c,c2)
+	#print "cost1 - cost2 is %s"%cost.print_cost(diff)
 
 	# read in the number of rows and columns and number of edges
 

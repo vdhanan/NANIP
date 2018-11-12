@@ -28,20 +28,24 @@ def cost_function(G,sigma):
 
 def print_cost(num):
     function = ""
+    cost = 0
     for f in sorted(num.iterkeys()):
-    # for f in num:
-        if num[f] == 1:
-            n = "+"
-        elif num[f] == -1:
-            n = "-"
-        else:
-            n = str(num[f])
-        if n[0]!='+' and n[0]!='-':
-            function += "+"
-        function += str(n)+("f(%d)"%f)
+        # for f in num:
+        #if num[f] == 1:
+        #    n = "+"
+        #elif num[f] == -1:
+        #    n = "-"
+        #else:
+        #    n = str(num[f])
+        #if n[0]!='+' and n[0]!='-':
+        #    function += "+"
+        #function += str(n)+("f(%d)"%f)
         # function += str(n)+f
-    l=len(function)
-    return function[1:]
+        if f != 0:
+            cost += (num[f] * 1/f)
+    #l=len(function)
+    function = 'f(0) + ' + str(cost)
+    return function
 
 def cost_diff(cost1, cost2):
     diff = dict()
