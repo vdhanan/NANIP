@@ -42,7 +42,7 @@ def print_cost(num):
         #function += str(n)+("f(%d)"%f)
         # function += str(n)+f
         if f != 0:
-            cost += (num[f] * 1/f)
+            cost += (num[f] * 1.0/f)
     #l=len(function)
     #function = 'f(0) + ' + str(cost)
     return cost
