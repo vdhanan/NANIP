@@ -41,15 +41,18 @@ def parse(file,blackstart):
 
 	# nx.draw(G)
 	# plt.savefig("path.png")
+        print "Done making graph \n"
+
 	number_of_nodes = nx.number_of_nodes(G)
         blackstart_rand = randint(2, number_of_nodes)
         
         sigma = greedy.normal_greedy(G,blackstart)
         sigma_rand = greedy.normal_greedy(G, blackstart_rand)
-	c = cost.cost_function(G, sigma)
+	print "Sigma calculated \n"
+        c = cost.cost_function(G, sigma)
         c_rand = cost.cost_function(G, sigma_rand)
 
-	# print "Normal greedy: \n"
+	print "Normal greedy done \n"
 	# print "Installation order is %s \n" %sigma
 	# print "The cost of this order is %s \n" %cost.print_cost(c)
 
@@ -58,7 +61,7 @@ def parse(file,blackstart):
         c2 = cost.cost_function(G, sigma2)
         c2_rand = cost.cost_function(G, sigma2_rand)
 
-	# print "Percentage greedy: \n"
+	print "Percentage greedy done \n"
 	# print "Installation order is %s \n" %sigma2
 	# print "The cost of this order is %s \n" %cost.print_cost(c2)
 
@@ -150,12 +153,13 @@ def testJ1():
 # 	testJ1()
 
 # def minCost(G,blackstart):
-	
-n = int(sys.stdin.readline())
+
+lines = [line.rstrip('\n') for line in open('matrix_list.txt')]
+n = int(lines[0])
 json_dict = {}
 for i in range(1,n+1):
 	print "running on network number %d"%i
-	filename = sys.stdin.readline().rstrip('\n')
+	filename = lines[i]
         json_dict[filename] = parse(filename,1)
 with open('data.json', 'w') as outfile:
     json.dump(json_dict, outfile)
