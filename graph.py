@@ -4,7 +4,6 @@ import cost
 import random
 import sys
 import json
-from random import *
 # import matplotlib.pyplot as plt
 
 
@@ -41,35 +40,28 @@ def parse(file,blackstart):
 
 	# nx.draw(G)
 	# plt.savefig("path.png")
-    number_of_nodes = nx.number_of_nodes(G)
-    blackstart_rand = randint(2, number_of_nodes)
-
 	sigma = greedy.normal_greedy(G,blackstart)
-	sigma_rand = greedy.normal_greedy(G, blackstart_rand)
 	c = cost.cost_function(G, sigma)
-	c_rand = cost.cost_function(G, sigma_rand)
 
+        new_dict = {}
 
-	# print "Normal greedy: \n"
-	# print "Installation order is %s \n" %sigma
+	print "Normal greedy: \n"
+	print "Installation order is %s \n" %sigma
 	#print "The cost of this order is %s \n" %cost.print_cost(c)
+        new_dict['normal_greedy'] = cost.print_cost(c)
 
 	sigma2 = greedy.percentage_greedy(G,blackstart)
-	sigma2_rand = greedy.percentage_greedy(G, blackstart_rand)
 	c2 = cost.cost_function(G, sigma2)
-	c2_rand = cost.cost_function(G, sigma2_rand)
 
-	# print "Percentage greedy: \n"
-	# print "Installation order is %s \n" %sigma2
+	print "Percentage greedy: \n"
+	print "Installation order is %s \n" %sigma2
 	#print "The cost of this order is %s \n" %cost.print_cost(c2)
-    new_dict = {}
-    new_dict['blackstart_1'] = {'normal_greedy': cost.print_cost(c), 'percentage_greedy': cost.print_cost(c2)}
-    new_dict['blackstart_rand'] = {'normal_greedy': cost.print_cost(c_rand), 'percentage_greedy': cost.print_cost(c2_rand)}
+        new_dict['percentage_greedy'] = cost.print_cost(c2)
 
 	#diff = cost.cost_diff(c,c2)
 	#print "cost1 - cost2 is %s"%cost.print_cost(diff)
 
-    return new_dict
+        return new_dict
 
 	# read in the number of rows and columns and number of edges
 
@@ -148,7 +140,7 @@ def testJ1():
 	# print "PGreedy cost for distinct cycle is", cos2
 
 # for i in range(0,10):
-#     testJ1()
+# 	testJ1()
 
 # def minCost(G,blackstart):
 	
@@ -157,7 +149,7 @@ json_dict = {}
 for i in range(1,n+1):
 	print "running on network number %d"%i
 	filename = sys.stdin.readline().rstrip('\n')
-    json_dict[filename] = parse(filename,1)
+        json_dict[filename] = parse(filename,1)
 with open('data.json', 'w') as outfile:
     json.dump(json_dict, outfile)
 print(json_dict)
