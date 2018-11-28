@@ -29,6 +29,8 @@ def cost_function(G,sigma):
 def print_cost(num):
     function = ""
     cost = 0
+    cost_sqr = 0
+    cost_sqrt = 0
     for f in sorted(num.iterkeys()):
         # for f in num:
         #if num[f] == 1:
@@ -43,9 +45,11 @@ def print_cost(num):
         # function += str(n)+f
         if f != 0:
             cost += (num[f] * 1.0/f)
+            cost_sqr += (num[f] * 1.0/(f**2))
+            cost_sqrt += (num[f] * 1.0/(f**0.5))
     #l=len(function)
     #function = 'f(0) + ' + str(cost)
-    return cost
+    return {'cost_inv': cost, 'cost_sqr': cost_sqr, 'cost_sqrt': cost_sqrt}
 
 def cost_diff(cost1, cost2):
     diff = dict()
