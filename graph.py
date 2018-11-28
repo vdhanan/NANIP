@@ -4,6 +4,7 @@ import cost
 import random
 import sys
 import json
+from random import *
 # import matplotlib.pyplot as plt
 
 
@@ -40,27 +41,33 @@ def parse(file,blackstart):
 
 	# nx.draw(G)
 	# plt.savefig("path.png")
-	sigma = greedy.normal_greedy(G,blackstart)
+	number_of_nodes = nx.number_of_nodes(G)
+        blackstart_rand = randint(2, number_of_nodes)
+        
+        sigma = greedy.normal_greedy(G,blackstart)
+        sigma_rand = greedy.normal_greedy(G, blackstart_rand)
 	c = cost.cost_function(G, sigma)
+        c_rand = cost.cost_function(G, sigma_rand)
 
-        new_dict = {}
-
-	print "Normal greedy: \n"
-	print "Installation order is %s \n" %sigma
-	#print "The cost of this order is %s \n" %cost.print_cost(c)
-        new_dict['normal_greedy'] = cost.print_cost(c)
+	# print "Normal greedy: \n"
+	# print "Installation order is %s \n" %sigma
+	# print "The cost of this order is %s \n" %cost.print_cost(c)
 
 	sigma2 = greedy.percentage_greedy(G,blackstart)
-	c2 = cost.cost_function(G, sigma2)
+	sigma2_rand = greedy.percentage_greedy(G, blackstart_rand)
+        c2 = cost.cost_function(G, sigma2)
+        c2_rand = cost.cost_function(G, sigma2_rand)
 
-	print "Percentage greedy: \n"
-	print "Installation order is %s \n" %sigma2
-	#print "The cost of this order is %s \n" %cost.print_cost(c2)
-        new_dict['percentage_greedy'] = cost.print_cost(c2)
+	# print "Percentage greedy: \n"
+	# print "Installation order is %s \n" %sigma2
+	# print "The cost of this order is %s \n" %cost.print_cost(c2)
 
 	#diff = cost.cost_diff(c,c2)
 	#print "cost1 - cost2 is %s"%cost.print_cost(diff)
-
+        new_dict = {}
+        new_dict['blackstart_1'] = {'normal_greedy': cost.print_cost(c), 'percentage_greedy': cost.print_cost(c2)}
+        blackstart_rand_label = 'blackstart_' + str(blackstart_rand)
+        new_dict[blackstart_rand_label] = {'normal_greedy': cost.print_cost(c_rand), 'percentage_greedy': cost.print_cost(c2_rand)}
         return new_dict
 
 	# read in the number of rows and columns and number of edges
