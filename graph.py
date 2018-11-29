@@ -45,12 +45,15 @@ def parse(file,blackstart):
 
 	number_of_nodes = nx.number_of_nodes(G)
         blackstart_rand = randint(2, number_of_nodes)
-        
+        blackstart_highest_rank = sorted(G.degree_iter(),key=itemgetter(1),reverse=True)[0]
+
         sigma = greedy.normal_greedy(G,blackstart)
         sigma_rand = greedy.normal_greedy(G, blackstart_rand)
+        sigma_highest_rank = greedy.normal_greedy(G, blackstart_highest_rank)
 	print "Sigma calculated \n"
         c = cost.cost_function(G, sigma)
         c_rand = cost.cost_function(G, sigma_rand)
+        c_highest_rank = cost.cost_function(G, sigma_highest_rank)
 
 	print "Normal greedy done \n"
 	# print "Installation order is %s \n" %sigma
@@ -58,8 +61,11 @@ def parse(file,blackstart):
 
 	sigma2 = greedy.percentage_greedy(G,blackstart)
 	sigma2_rand = greedy.percentage_greedy(G, blackstart_rand)
+        sigma2_highest_rank = greedy.percentage_greedy(G, blackstart_highest_rank)
+        print "Sigma calculated \n"
         c2 = cost.cost_function(G, sigma2)
         c2_rand = cost.cost_function(G, sigma2_rand)
+        c2_highest_rank = cost.cost_function(G, sigma2_highest_rank)
 
 	print "Percentage greedy done \n"
 	# print "Installation order is %s \n" %sigma2
@@ -69,8 +75,10 @@ def parse(file,blackstart):
 	#print "cost1 - cost2 is %s"%cost.print_cost(diff)
         new_dict = {}
         new_dict['blackstart_1'] = {'normal_greedy': cost.print_cost(c), 'percentage_greedy': cost.print_cost(c2)}
-        blackstart_rand_label = 'blackstart_' + str(blackstart_rand)
+        blackstart_rand_label = 'blackstart_random_' + str(blackstart_rand)
         new_dict[blackstart_rand_label] = {'normal_greedy': cost.print_cost(c_rand), 'percentage_greedy': cost.print_cost(c2_rand)}
+        blackstart_highest_rank_label = 'blackstart_highest_rank_' + str(blackstart_highest_rank)
+        new_dict[blackstart_highest_rank_label] = {'normal_greedy': cost.print_cost(c_highest_rank), 'percentage_greedy': cost.print_cost(c2_highest_rank)}
         return new_dict
 
 	# read in the number of rows and columns and number of edges
