@@ -5,6 +5,7 @@ import random
 import sys
 import json
 from random import *
+from operator import itemgetter
 # import matplotlib.pyplot as plt
 
 
@@ -45,7 +46,8 @@ def parse(file,blackstart):
 
 	number_of_nodes = nx.number_of_nodes(G)
         blackstart_rand = randint(2, number_of_nodes)
-        blackstart_highest_rank = sorted(G.degree_iter(),key=itemgetter(1),reverse=True)[0]
+        print sorted(G.degree_iter(),key=itemgetter(1),reverse=True)[0]
+        blackstart_highest_rank = sorted(G.degree_iter(),key=itemgetter(1),reverse=True)[0][0]
 
         sigma = greedy.normal_greedy(G,blackstart)
         sigma_rand = greedy.normal_greedy(G, blackstart_rand)
